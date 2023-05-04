@@ -18,7 +18,12 @@ print(string1.get())
 #Уровень 2
 import math
 
-class Point:
+class DistCalc:
+    #расстояние между двумя точками
+    @staticmethod
+    def dist_two_dots(point, other):
+        return math.sqrt((point.x + other.x) ** 2 + (point.y + other.y) ** 2)
+class Point(DistCalc):
     def __init__(self, x: int, y:int):
         self.x = x
         self.y = y
@@ -39,11 +44,8 @@ class Point:
     def __sub__(self, other):
         return Point(self.x - other.x, self.y - other.y)
 
-    #расстояние между двумя точками координат
-    def dist_two_dots(self, point):
-        return math.sqrt((self.x + point.x) ** 2 + (self.y + point.y) ** 2)
-
 p = Point(1, 1)
+print(p.dist_two_dots(point=Point(1, 1), other=Point(3, 4)))
 
 #Уровень 3
 ## - 3.1
@@ -51,20 +53,26 @@ class Warrior:
     def __init__(self, name: str):
         self.name = name
         self.health = 100
+        self.damage = 20
 
-    def attack(self, unit):
+    def __is_dead(self, unit):
         if unit.health <= 0:
             return print(f'Winner: {self.name}')
 
-        unit.health -= 20
+    def attack(self, unit):
+        unit.health -= self.damage
         print(f'{self.name} attack {unit.name}')
         print(f'{unit.name} has {unit.health}')
+        print('--------')
+        self.__is_dead(unit)
 
 unit1 = Warrior('John')
 unit2 = Warrior('Sam')
 
 unit1.attack(unit2)
+unit2.attack(unit1)
 unit1.attack(unit2)
+unit2.attack(unit1)
 unit1.attack(unit2)
 unit1.attack(unit2)
 unit1.attack(unit2)
@@ -75,5 +83,6 @@ class Warrior:
     def __init__(self, name: str):
         self.name = name
         self.health = 100
+        self.damage = 20
         self.armor = 100
         self.endurance = 100

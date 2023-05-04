@@ -12,9 +12,10 @@ class Model:
             json.dump(dictionary, outfile)
 
 class Test:
-    def __init__(self, title):
+    def __init__(self, title, subtitle):
         self.title = title
+        self.subtitle = subtitle
 
-test = Test('hi title')
+test = Test('title', 'subtitle')
 m = Model()
 m.save(test)
