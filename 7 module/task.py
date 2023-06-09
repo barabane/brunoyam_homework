@@ -22,11 +22,12 @@ for td in tds:
     row.append(td)
     i += 1
     if i == 3:
-        usdt_courses.append(row[1])
+        usdt_courses.append(round(float(row[1])))
         i = 0
         row.clear()
 
 fig, ax = plt.subplots()  # Create a figure containing a single axes.
-ax.plot(usdt_courses) 
+usdt_courses.reverse()
+ax.plot(usdt_courses)
     
 plt.show()
